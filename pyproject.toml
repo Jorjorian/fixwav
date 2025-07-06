@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spindlespace"
+version = "0.1.0"
+description = "Procedural generator for Spindlespace rail networks and worlds"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "Spindlespace Generator", email = "dev@spindlespace.dev"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pydantic>=2.0",
+    "typer>=0.9.0",
+    "networkx>=3.0",
+    "matplotlib>=3.5",
+    "plotly>=5.0",
+    "reportlab>=4.0",
+    "weasyprint>=60.0",
+    "jinja2>=3.0",
+    "pyyaml>=6.0",
+    "textual>=0.40.0",
+    "streamlit>=1.25.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=22.0",
+    "flake8>=5.0",
+    "mypy>=1.0",
+]
+
+[project.scripts]
+spindle = "spindlespace.ui.cli:app"
+
+[project.entry-points."spindlespace.generators"]
+default_star = "spindlespace.generators.stargen:DefaultStarGenerator"
+default_rail = "spindlespace.generators.railgen:DefaultRailGenerator"
+default_schedule = "spindlespace.generators.schedgen:DefaultScheduleGenerator"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["spindlespace*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
